@@ -108,13 +108,25 @@ namespace RockPaperScissor
             var botChoiceStackPanel = (StackPanel)mainGrid.Children[0];
 
             var botChoiceImage = (Image)botChoiceStackPanel.Children[0];
-            botChoiceImage.Source = new BitmapImage(new Uri($"C:\\Users\\User\\source\\repos\\RockPaperScissor\\Images\\{element}.png"));
+            botChoiceImage.Source = new BitmapImage(new Uri($"C:\\Users\\User\\source\\repos\\RockPaperScissor\\Images\\{botChoice}.png"));
             botChoiceImage.Visibility = Visibility.Visible;
 
             var botChoiceText = (TextBlock)botChoiceStackPanel.Children[1];
             botChoiceText.Text = $"Bot's Choice: {botChoice}";
 
             var resultText = (TextBlock)mainGrid.Children[2];
+        }
+
+        private string DetermineWinner(string playerChoice, string botChoice)
+        {
+            if (playerChoice == botChoice) return "It's a tie!";
+            if ((playerChoice == "Rock" && botChoice == "Scissors") ||
+                (playerChoice == "Paper" && botChoice == "Rock") ||
+                (playerChoice == "Scissors" && botChoice == "Paper"))
+            {
+                return "You win!";
+            }
+            return "Bot wins!";
         }
     }
 }
