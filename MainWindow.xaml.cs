@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace RockPaperScissor
 {
@@ -96,6 +97,24 @@ namespace RockPaperScissor
 
             // Set the grid as the content of the window
             this.Content = mainGrid;
+        }
+
+        private void OnPlayerChoice(object sender, RoutedEventArgs e)
+        {
+            var playerChoice = (string)((Button)sender).Tag;
+            var botChoice = gameElements[random.Next(gameElements.Length)];
+
+            var mainGrid = (Grid)this.Content;
+            var botChoiceStackPanel = (StackPanel)mainGrid.Children[0];
+
+            var botChoiceImage = (Image)botChoiceStackPanel.Children[0];
+            botChoiceImage.Source = new BitmapImage(new Uri($"C:\\Users\\User\\source\\repos\\RockPaperScissor\\Images\\{element}.png"));
+            botChoiceImage.Visibility = Visibility.Visible;
+
+            var botChoiceText = (TextBlock)botChoiceStackPanel.Children[1];
+            botChoiceText.Text = $"Bot's Choice: {botChoice}";
+
+            var resultText = (TextBlock)mainGrid.Children[2];
         }
     }
 }
